@@ -1,7 +1,7 @@
 package conf
 
 type AppConfig struct {
-	DBHost   string `env:"DB_HOST" envDefault:"localhost"`
+	DBHost   string `env:"DB_HOST" envDefault:"sofmie.com"`
 	DBPort   string `env:"DB_PORT" envDefault:"5432"`
 	DBUser   string `env:"DB_USER" envDefault:"postgres"`
 	DBPass   string `env:"DB_PASS" envDefault:"postgres"`

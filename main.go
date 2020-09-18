@@ -1,11 +1,12 @@
 package main
 
 import (
-	"demo/conf"
 	_ "demo/routers"
 	"demo/utils"
 	"fmt"
 	"log"
+
+	"demo/conf"
 
 	"github.com/astaxie/beego"
 	"github.com/caarlos0/env"
