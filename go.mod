@@ -1,15 +1,7 @@
 module github.com/PhuocThanhUIT/Demo
 
 go 1.15
-import (
-	demo/conf 
-	demo/utils
-	demo/models
-	demo/controllers
-	demo/routes
-	demo/database
-	demo/helper
-)
+
 require (
 	github.com/BillSJC/appleLogin v0.0.0-20190916123152-090c3039745d
 	github.com/astaxie/beego v1.12.2
