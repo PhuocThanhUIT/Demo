@@ -1,0 +1,247 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "beego Test API",
+        "description": "beego has a very cool tools to autogenerate documents for your API",
+        "version": "1.0.0",
+        "termsOfService": "http://beego.me/",
+        "contact": {
+            "email": "astaxie@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "basePath": "/v1",
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "login"
+                ],
+                "description": "login",
+                "operationId": "LoginController.Login",
+                "parameters": [
+
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "phone and password",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.LoginInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "token": {"type":"string"},
+                        "refreshtoken":{"type":"string"},
+                        "description": "{string} token and {string} refreshtoken"
+                    },
+                    "403": {
+                        "description": "Wrong Email or Password"
+                    },
+                    "500": {
+                        "description": "error message"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "Get User"
+                ],
+                "description": "Get User",
+                "operationId": "UserController.GetUser",
+                "parameters":[
+                        {
+                            "type": "string",
+                            "name": "Bearer Token",
+                            "description":"Authentication",
+                            "in": "header"
+                        }
+                ],
+                
+                "responses": {
+                    "200": {
+                        "Userinfo": "#/definitions/models.User",
+                        "description": "User info"
+                    },
+                    "403": {
+                        "description": "error message"
+                    },
+                    "500": {
+                        "description": "error message"
+                    }
+                }
+            }
+        },
+        "/otp/generate-otp": {
+            "post": {
+                "tags": [
+                    "Create Otp"
+                ],
+                "description": "CreateOtp",
+                "operationId": "OtpController.GenerateOtp",
+                "parameters": [
+
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "phone and pass and otp",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/helper.OtpInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "error message"
+                    },
+                    "500": {
+                        "description": "error message"
+                    }
+                }
+            }
+        },
+        "/otp/check-otp": {
+            "post": {
+                "tags": [
+                    "Check Otp and create user"
+                ],
+                "description": "CheckOtp",
+                "operationId": "OtpController.CheckOtp",
+                "parameters": [
+
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "phone and pass and otp",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/helper.OtpInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "error message"
+                    },
+                    "500": {
+                        "description": "error message"
+                    }
+                }
+            }
+        }
+    },
+        
+    "definitions": {
+        "models.LoginInput": {
+            "title": "LoginInput",
+            "type": "object",
+            "properties": {
+                "phone_number": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "helper.OtpInput": {
+            "title": "OtpInput",
+            "type": "object",
+            "properties": {
+                "phone_number": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "otp": {
+                    "type":"string"
+                }
+            }
+        },
+        "models.User": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "id": {
+                    "type": "int"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "datetime"
+                }
+            }
+        },
+        "models.Otp": {
+            "title": "Otp",
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "failed_times": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "id": {
+                    "type": "int"
+                },
+                "otp": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "time_life": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "datetime"
+                }
+            }
+        }     
+    },
+    "securityDefinitions":{
+        
+    },
+    "tags": [
+        {
+            "name": "login",
+            "description": " LoginController operations for login\n"
+        }          
+    ]
+}
+        
+                  
+                   
+                  
