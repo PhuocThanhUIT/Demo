@@ -1,33 +1,16 @@
-version: "3"
-services:
-  ms-customer:
-    image: golang:1.14
-    command: ["go", "run", "main.go"]
-    working_dir: /demo
-    depends_on:
-      - postgres
-    environment:
-        HTTP_PORT: 80
-        GOPATH: /gopath  
-    ports:
-      - 8089:80
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
 
-  postgres:
-    image: postgres:11
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
+version: '3'
+
+# Define services
+services:
+
+  # App Service
+  app:
+    # Configuration for building the docker image for the service
+    build:
+      context: . # Use an image built from the specified dockerfile in the current directory.
+      dockerfile: Dockerfile
     ports:
-      - 5432:5432
-  pgadmin:
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-        PGADMIN_DEFAULT_EMAIL: thanh@gmail.com
-        PGADMIN_DEFAULT_PASSWORD: 123456
-        PGADMIN_LISTEN_PORT: 8001
-    ports:
-      - "8001:8001"
-    links:
-      - "postgres:sofmie.com"
+      - "8080:80" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: unless-stopped 

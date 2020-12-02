@@ -1,9 +1,7 @@
 package controllers
 
 import (
-	"demo/helper"
 	"demo/models"
-	"demo/utils"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -20,10 +18,10 @@ type LoginController struct {
 
 func (c *LoginController) URLMapping() {
 	c.Mapping("Login", c.Login)
-	c.Mapping("Google", c.Google)
-	c.Mapping("Facebook", c.Facebook)
-	c.Mapping("FacebookCallback", c.FacebookCallback)
-	c.Mapping("GoogleCallback", c.GoogleCallback)
+	//c.Mapping("Google", c.Google)
+	//c.Mapping("Facebook", c.Facebook)
+	//c.Mapping("FacebookCallback", c.FacebookCallback)
+	//c.Mapping("GoogleCallback", c.GoogleCallback)
 }
 
 // Post ...
@@ -83,6 +81,7 @@ func (u *LoginController) Login() {
 	//cus.JSON(http.StatusOK, token)
 }
 
+/*
 // @Title Google
 // @Description login google
 // @Success 200 redirect to login google URL
@@ -105,6 +104,7 @@ func (u *LoginController) Facebook() {
 	//u.ServeJSON()
 }
 
+/*
 // @Title FacebookCallback
 // @Description revice code from facebook and get infor user facebook
 // @Param	state	query	string	false	"state from server"
@@ -216,3 +216,4 @@ func (u *LoginController) GoogleCallback() {
 	u.Data["json"] = res
 	u.ServeJSON()
 }
+*/

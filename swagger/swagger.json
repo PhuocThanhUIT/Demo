@@ -15,7 +15,7 @@
     },
     "basePath": "/v1",
     "paths": {
-        "/login/": {
+        "/login": {
             "post": {
                 "tags": [
                     "login"
@@ -27,7 +27,7 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "email and password",
+                        "description": "phone and password",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/models.LoginInput"
@@ -36,6 +36,8 @@
                 ],
                 "responses": {
                     "200": {
+                        "token": {"type":"string"},
+                        "refreshtoken":{"type":"string"},
                         "description": "{string} token and {string} refreshtoken"
                     },
                     "403": {
@@ -46,48 +48,191 @@
                     }
                 }
             }
-        }
-    },
-   
-    "models.BaseModel": {
-        "title": "BaseModel",
-        "type": "object",
-        "properties": {
-            "created_at": {
-                "type": "string",
-                "format": "datetime"
-            },
-            "id": {
-                "type": "uint64"
-            },
-            "updated_at": {
-                "type": "string",
-                "format": "datetime"
+        },
+        "/user": {
+            "get": {
+                "tags": [
+                    "Get User"
+                ],
+                "description": "Get User",
+                "operationId": "UserController.GetUser",
+                "parameters":[
+                        {
+                            "type": "string",
+                            "name": "Bearer Token",
+                            "description":"Authentication",
+                            "in": "header"
+                        }
+                ],
+                
+                "responses": {
+                    "200": {
+                        "Userinfo": "#/definitions/models.User",
+                        "description": "User info"
+                    },
+                    "403": {
+                        "description": "error message"
+                    },
+                    "500": {
+                        "description": "error message"
+                    }
+                }
+            }
+        },
+        "/otp/generate-otp": {
+            "post": {
+                "tags": [
+                    "Create Otp"
+                ],
+                "description": "CreateOtp",
+                "operationId": "OtpController.GenerateOtp",
+                "parameters": [
+
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "phone and pass and otp",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/helper.OtpInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "error message"
+                    },
+                    "500": {
+                        "description": "error message"
+                    }
+                }
+            }
+        },
+        "/otp/check-otp": {
+            "post": {
+                "tags": [
+                    "Check Otp and create user"
+                ],
+                "description": "CheckOtp",
+                "operationId": "OtpController.CheckOtp",
+                "parameters": [
+
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "phone and pass and otp",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/helper.OtpInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "403": {
+                        "description": "error message"
+                    },
+                    "500": {
+                        "description": "error message"
+                    }
+                }
             }
         }
     },
-    "models.User": {
-        "title": "User",
-        "type": "object",
-        "properties": {
-            "created_at": {
-                "type": "string",
-                "format": "datetime"
-            },
-            "email": {
-                "type": "string"
-            },
-            "id": {
-                "type": "uint64"
-            },
-            "password": {
-                "type": "string"
-            },
-            "updated_at": {
-                "type": "string",
-                "format": "datetime"
+        
+    "definitions": {
+        "models.LoginInput": {
+            "title": "LoginInput",
+            "type": "object",
+            "properties": {
+                "phone_number": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
             }
-        }
+        },
+        "helper.OtpInput": {
+            "title": "OtpInput",
+            "type": "object",
+            "properties": {
+                "phone_number": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "otp": {
+                    "type":"string"
+                }
+            }
+        },
+        "models.User": {
+            "title": "User",
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "id": {
+                    "type": "int"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "datetime"
+                }
+            }
+        },
+        "models.Otp": {
+            "title": "Otp",
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "failed_times": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "id": {
+                    "type": "int"
+                },
+                "otp": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "time_life": {
+                    "type": "string",
+                    "format": "datetime"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string",
+                    "format": "datetime"
+                }
+            }
+        }     
+    },
+    "securityDefinitions":{
+        
     },
     "tags": [
         {

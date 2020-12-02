@@ -25,6 +25,11 @@ func init() {
 				&controllers.LoginController{},
 			),
 		),
+		beego.NSNamespace("/otp",
+			beego.NSInclude(
+				&controllers.OtpController{},
+			),
+		),
 	)
 	beego.AddNamespace(ns)
 }

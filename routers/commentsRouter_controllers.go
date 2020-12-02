@@ -25,40 +25,20 @@ func init() {
 			Filters:          nil,
 			Params:           nil})
 
-	beego.GlobalControllerRouter["demo/controllers:LoginController"] = append(beego.GlobalControllerRouter["demo/controllers:LoginController"],
+	beego.GlobalControllerRouter["demo/controllers:OtpController"] = append(beego.GlobalControllerRouter["demo/controllers:OtpController"],
 		beego.ControllerComments{
-			Method:           "Facebook",
-			Router:           `/facebook`,
-			AllowHTTPMethods: []string{"get"},
+			Method:           "GenerateOtp",
+			Router:           `/generate-otp`,
+			AllowHTTPMethods: []string{"post"},
 			MethodParams:     param.Make(),
 			Filters:          nil,
 			Params:           nil})
-
-	beego.GlobalControllerRouter["demo/controllers:LoginController"] = append(beego.GlobalControllerRouter["demo/controllers:LoginController"],
+	beego.GlobalControllerRouter["demo/controllers:OtpController"] = append(beego.GlobalControllerRouter["demo/controllers:OtpController"],
 		beego.ControllerComments{
-			Method:           "FacebookCallback",
-			Router:           `/facebookcallback`,
-			AllowHTTPMethods: []string{"get"},
+			Method:           "CheckOtp",
+			Router:           `/check-otp`,
+			AllowHTTPMethods: []string{"post"},
 			MethodParams:     param.Make(),
 			Filters:          nil,
 			Params:           nil})
-
-	beego.GlobalControllerRouter["demo/controllers:LoginController"] = append(beego.GlobalControllerRouter["demo/controllers:LoginController"],
-		beego.ControllerComments{
-			Method:           "Google",
-			Router:           `/google`,
-			AllowHTTPMethods: []string{"get"},
-			MethodParams:     param.Make(),
-			Filters:          nil,
-			Params:           nil})
-
-	beego.GlobalControllerRouter["demo/controllers:LoginController"] = append(beego.GlobalControllerRouter["demo/controllers:LoginController"],
-		beego.ControllerComments{
-			Method:           "GoogleCallback",
-			Router:           `/googlecallback`,
-			AllowHTTPMethods: []string{"get"},
-			MethodParams:     param.Make(),
-			Filters:          nil,
-			Params:           nil})
-
 }

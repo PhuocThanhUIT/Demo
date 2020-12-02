@@ -37,7 +37,7 @@ func (u *UserController) GetUser() {
 	}
 	//userId, err := models.FetchAuth(tokenAuth)
 	userId := tokenAuth.UserId
-	cus, err := models.GetCustomerFromID(userId)
+	cus, err := models.GetUserFromID(userId)
 	if err != nil {
 
 		return

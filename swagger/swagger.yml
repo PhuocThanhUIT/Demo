@@ -31,34 +31,18 @@ paths:
           description: Wrong Email or Password
         "500":
           description: error message
-  models.BaseModel:
-    title: BaseModel
-    type: object
-    properties:
-      created_at:
-        type: string
-        format: datetime
-      id:
-        type: uint64
-      updated_at:
-        type: string
-        format: datetime
-  models.User:
-    title: User
-    type: object
-    properties:
-      created_at:
-        type: string
-        format: datetime
-      email:
-        type: string
-      id:
-        type: uint64
-      password:
-        type: string
-      updated_at:
-        type: string
-        format: datetime
+          definitions:
+            helper.LoginInput:
+              title: LoginInput
+              type: object
+              properties:
+                device_id:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+
 tags:
 - name: login
   description: |

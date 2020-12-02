@@ -1,5 +1,6 @@
 package helper
 
+/*
 import (
 	"demo/models"
 	"demo/utils"
@@ -76,6 +77,7 @@ func LoginInWithGoogle() string {
 	return urlRes
 }
 
+//Tao thang usersocial
 func RedirectToRegisterPage(input models.User) string {
 	//Url, err := url.Parse(utils.REGISTER_URL)
 	//if err != nil {
@@ -175,3 +177,4 @@ func ProcessCallBackGoogle(state string, code string) (res UserGoogle, err error
 	_ = json.Unmarshal(data, &res)
 	return
 }
+*/

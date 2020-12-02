@@ -9,7 +9,4 @@ type BaseModel struct {
 	CreatedAt time.Time `gorm:"default:current_timestamp" json:"created_at"`
 	UpdatedAt time.Time `gorm:"default:current_timestamp" json:"updated_at"`
 }
-type LoginInput struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
-}
+
